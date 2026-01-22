@@ -9,6 +9,10 @@ target/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
+
+# GitHub Copilot (JetBrains) migration/state files
+.idea/copilot.data.migration*.xml
+
 *.iws
 *.iml
 *.ipr
