@@ -1,4 +1,4 @@
-package lambda.excercise01;
+package lambda;
 
 /**
  * A complete Java program demonstrating lambda expressions to find the sum of two integers.
