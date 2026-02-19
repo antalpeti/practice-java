@@ -1,11 +1,10 @@
-package lambda;
+package lambda.example004;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.function.BinaryOperator;
 import java.util.function.IntBinaryOperator;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for lambda expressions used to sum two integers

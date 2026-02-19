@@ -1,4 +1,4 @@
-package lambda;
+package lambda.example002;
 
 /**
  * A Java program demonstrating lambda expressions that add two integers
@@ -6,22 +6,6 @@ package lambda;
  * This showcases function composition and lambda chaining.
  */
 public class SumAndMultiplyProgram {
-
-    /**
-     * Custom functional interface for operations with two integers and a factor
-     */
-    @FunctionalInterface
-    interface IntegerOperationWithFactor {
-        int apply(int a, int b, int factor);
-    }
-
-    /**
-     * Functional interface for a two-step operation
-     */
-    @FunctionalInterface
-    interface TwoStepOperation {
-        int execute(int a, int b);
-    }
 
     // Constant factor for multiplication
     private static final int DEFAULT_FACTOR = 3;
@@ -52,19 +36,19 @@ public class SumAndMultiplyProgram {
 
         // Approach 4: Function composition
         System.out.println("\nApproach 4: Function Composition");
-        int result4 = composedOperation(50, 60, DEFAULT_FACTOR);
+        int result4 = SumAndMultiplyProgramHelper.composedOperation(50, 60, DEFAULT_FACTOR);
         System.out.println("(50 + 60) * " + DEFAULT_FACTOR + " = " + result4);
 
         // Approach 5: Lambda as method parameter
         System.out.println("\nApproach 5: Lambda as Method Parameter");
-        int result5 = executeOperation(70, 80, 2, (a, b, f) -> (a + b) * f);
+        int result5 = SumAndMultiplyProgramHelper.executeOperation(70, 80, 2, (a, b, f) -> (a + b) * f);
         System.out.println("(70 + 80) * 2 = " + result5);
 
         // Approach 6: Creating a factory method for different factors
         System.out.println("\nApproach 6: Factory Method for Different Factors");
-        TwoStepOperation doubler = createSumAndMultiplyOperation(2);
-        TwoStepOperation tripler = createSumAndMultiplyOperation(3);
-        TwoStepOperation quadrupler = createSumAndMultiplyOperation(4);
+        TwoStepOperation doubler = SumAndMultiplyProgramHelper.createSumAndMultiplyOperation(2);
+        TwoStepOperation tripler = SumAndMultiplyProgramHelper.createSumAndMultiplyOperation(3);
+        TwoStepOperation quadrupler = SumAndMultiplyProgramHelper.createSumAndMultiplyOperation(4);
 
         int baseA = 10;
         int baseB = 5;
@@ -74,50 +58,8 @@ public class SumAndMultiplyProgram {
 
         // Demonstrate with various test cases
         System.out.println("\n=== Additional Examples ===");
-        demonstrateWithDifferentInputs(sumAndMultiply);
+        SumAndMultiplyProgramHelper.demonstrateWithDifferentInputs(sumAndMultiply);
     }
 
-    /**
-     * Performs the operation using function composition approach
-     */
-    private static int composedOperation(int a, int b, int factor) {
-        java.util.function.IntBinaryOperator sum = (x, y) -> x + y;
-        java.util.function.IntUnaryOperator multiply = x -> x * factor;
-
-        return multiply.applyAsInt(sum.applyAsInt(a, b));
-    }
-
-    /**
-     * Method that accepts a lambda expression with factor as a parameter
-     */
-    private static int executeOperation(int a, int b, int factor, IntegerOperationWithFactor operation) {
-        return operation.apply(a, b, factor);
-    }
-
-    /**
-     * Factory method that creates a lambda with a specific factor
-     * Demonstrates closure where the factor is captured by the lambda
-     */
-    private static TwoStepOperation createSumAndMultiplyOperation(int factor) {
-        return (a, b) -> (a + b) * factor;
-    }
-
-    /**
-     * Demonstrates the lambda with various test cases
-     */
-    private static void demonstrateWithDifferentInputs(IntegerOperationWithFactor operation) {
-        System.out.println("Positive numbers: (100 + 200) * 2 = "
-            + operation.apply(100, 200, 2));
-        System.out.println("Negative numbers: (-50 + -30) * 3 = "
-            + operation.apply(-50, -30, 3));
-        System.out.println("Mixed numbers: (45 + (-20)) * 4 = "
-            + operation.apply(45, -20, 4));
-        System.out.println("With zero: (0 + 99) * 5 = "
-            + operation.apply(0, 99, 5));
-        System.out.println("Large numbers: (1000 + 2000) * 10 = "
-            + operation.apply(1000, 2000, 10));
-        System.out.println("Negative factor: (10 + 5) * (-2) = "
-            + operation.apply(10, 5, -2));
-    }
 }
 

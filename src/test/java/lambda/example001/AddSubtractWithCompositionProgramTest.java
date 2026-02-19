@@ -1,15 +1,16 @@
-package lambda;
+package lambda.example001;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.util.function.IntBinaryOperator;
+import java.util.function.IntUnaryOperator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import java.util.function.IntBinaryOperator;
-import java.util.function.IntUnaryOperator;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for AddSubtractWithCompositionProgram
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("AddSubtractWithCompositionProgram Tests")
 class AddSubtractWithCompositionProgramTest {
 
-    private AddSubtractWithCompositionProgram.ThreeIntegerOperation addThenSubtract;
+    private ThreeIntegerOperation addThenSubtract;
 
     @BeforeEach
     void setUp() {
@@ -59,7 +60,7 @@ class AddSubtractWithCompositionProgramTest {
     @Test
     @DisplayName("Approach 3: Function composition returning a function")
     void testApproach3ComposedFunction() {
-        AddSubtractWithCompositionProgram.IntegerOperationComposer composedOperation =
+        IntegerOperationComposer composedOperation =
             (a, b) -> (c) -> a + b - c;
         IntUnaryOperator operation = composedOperation.apply(15, 25);
         int result = operation.applyAsInt(8);
@@ -69,7 +70,7 @@ class AddSubtractWithCompositionProgramTest {
     @Test
     @DisplayName("Approach 3: Composed function with negative subtraction")
     void testApproach3NegativeSubtraction() {
-        AddSubtractWithCompositionProgram.IntegerOperationComposer composedOperation =
+        IntegerOperationComposer composedOperation =
             (a, b) -> (c) -> a + b - c;
         IntUnaryOperator operation = composedOperation.apply(10, 10);
         int result = operation.applyAsInt(-5);
@@ -79,7 +80,7 @@ class AddSubtractWithCompositionProgramTest {
     @Test
     @DisplayName("Approach 3: Composed function resulting in zero")
     void testApproach3ResultingInZero() {
-        AddSubtractWithCompositionProgram.IntegerOperationComposer composedOperation =
+        IntegerOperationComposer composedOperation =
             (a, b) -> (c) -> a + b - c;
         IntUnaryOperator operation = composedOperation.apply(100, 200);
         int result = operation.applyAsInt(300);
@@ -91,21 +92,21 @@ class AddSubtractWithCompositionProgramTest {
     @Test
     @DisplayName("Approach 4: Composed function via static method")
     void testApproach4SimpleCase() {
-        int result = AddSubtractWithCompositionProgram.testComposeAddAndSubtract(30, 40, 12);
+        int result = AddSubtractWithCompositionProgramHelper.testComposeAddAndSubtract(30, 40, 12);
         assertEquals(58, result);
     }
 
     @Test
     @DisplayName("Approach 4: Method with negative numbers")
     void testApproach4NegativeNumbers() {
-        int result = AddSubtractWithCompositionProgram.testComposeAddAndSubtract(-10, 5, 3);
+        int result = AddSubtractWithCompositionProgramHelper.testComposeAddAndSubtract(-10, 5, 3);
         assertEquals(-8, result);
     }
 
     @Test
     @DisplayName("Approach 4: Method with all zeros")
     void testApproach4AllZeros() {
-        int result = AddSubtractWithCompositionProgram.testComposeAddAndSubtract(0, 0, 0);
+        int result = AddSubtractWithCompositionProgramHelper.testComposeAddAndSubtract(0, 0, 0);
         assertEquals(0, result);
     }
 
@@ -114,7 +115,7 @@ class AddSubtractWithCompositionProgramTest {
     @Test
     @DisplayName("Approach 5: Basic three-integer operation")
     void testApproach5BasicOperation() {
-        AddSubtractWithCompositionProgram.ThreeIntegerOperation operation =
+        ThreeIntegerOperation operation =
             (a, b, c) -> a + b - c;
         int result = operation.apply(45, 35, 20);
         assertEquals(60, result);
@@ -169,21 +170,21 @@ class AddSubtractWithCompositionProgramTest {
     @Test
     @DisplayName("Approach 6: Method reference with composition")
     void testApproach6MethodReference() {
-        int result = AddSubtractWithCompositionProgram.testComposeWithMethodReference(50, 60, 25);
+        int result = AddSubtractWithCompositionProgramHelper.testComposeWithMethodReference(50, 60, 25);
         assertEquals(85, result);
     }
 
     @Test
     @DisplayName("Approach 6: Method reference with zero")
     void testApproach6WithZero() {
-        int result = AddSubtractWithCompositionProgram.testComposeWithMethodReference(0, 0, 0);
+        int result = AddSubtractWithCompositionProgramHelper.testComposeWithMethodReference(0, 0, 0);
         assertEquals(0, result);
     }
 
     @Test
     @DisplayName("Approach 6: Method reference with negative numbers")
     void testApproach6NegativeNumbers() {
-        int result = AddSubtractWithCompositionProgram.testComposeWithMethodReference(-30, -20, -5);
+        int result = AddSubtractWithCompositionProgramHelper.testComposeWithMethodReference(-30, -20, -5);
         assertEquals(-45, result);
     }
 
@@ -263,7 +264,7 @@ class AddSubtractWithCompositionProgramTest {
     @DisplayName("Verify ThreeIntegerOperation is a functional interface")
     void testFunctionalInterfaceContract() {
         // Should be able to create instance with lambda
-        AddSubtractWithCompositionProgram.ThreeIntegerOperation operation =
+        ThreeIntegerOperation operation =
             (a, b, c) -> a + b - c;
         assertNotNull(operation);
         assertEquals(30, operation.apply(50, 30, 50));
@@ -272,7 +273,7 @@ class AddSubtractWithCompositionProgramTest {
     @Test
     @DisplayName("Verify IntegerOperationComposer is a functional interface")
     void testComposerFunctionalInterfaceContract() {
-        AddSubtractWithCompositionProgram.IntegerOperationComposer composer =
+        IntegerOperationComposer composer =
             (a, b) -> (c) -> a + b - c;
         assertNotNull(composer);
 

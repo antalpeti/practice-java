@@ -1,7 +1,8 @@
-package lambda;
+package lambda.example002;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for SumAndMultiplyProgram
