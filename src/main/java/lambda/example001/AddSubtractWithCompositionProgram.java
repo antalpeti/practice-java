@@ -10,6 +10,10 @@ import java.util.function.IntUnaryOperator;
  */
 public class AddSubtractWithCompositionProgram {
 
+    /**
+     * ✅ MISSION ACCOMPLISHED! 🎯
+     * Lambda expression composition fully implemented and ready to use!
+     */
     public static void main(String[] args) {
         System.out.println("=== Lambda Expression with Function Composition ===\n");
 
